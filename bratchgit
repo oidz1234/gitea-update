@@ -31,7 +31,7 @@ then
     echo exucting..
     chmod +x gitea
 
-    ./gitea web
+    ./gitea web &
 
 else
 echo There is no update
