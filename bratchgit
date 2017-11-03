@@ -1,0 +1,40 @@
+#! /bin/bash
+
+echo  Downloading the hash to compare 
+
+
+echo complete 
+
+NEWHASH="$(wget -O- 'https://github.com'$(curl -Ls  https://github.com/go-gitea/gitea/releases/latest | grep '\.*linux-amd64.sha256' | cut -d\" -f2  | head -1  ) |  cut -d " " -f 1)"
+OLDHASH="$(sha256sum gitea | cut -d " " -f 1)"
+
+
+if [ ""$NEWHASH"" !=  ""$OLDHASH"" ];
+then
+    echo it does not equal !;
+
+    echo removing old exucutable 
+    rm gitea
+
+    echo   downloading new one
+
+    #Avoid Phrasing HTMl
+
+    version=$(curl -v https://github.com/go-gitea/gitea/releases/latest 2>&1 | grep "^< Location:" | tr -d '\r' | grep -Eo "/v([0-9]|\.)+$" | sed 's|/v||') 
+    wget -O gitea https://github.com/go-gitea/gitea/releases/download/v"$version"/gitea-"$version"-linux-amd64
+
+
+    echo exucting..
+    chmod +x gitea
+
+    ./gitea web
+
+else
+echo There is no update
+
+fi
+
+
+
+echo cleaning up
+
