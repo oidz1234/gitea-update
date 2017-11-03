@@ -5,7 +5,7 @@ echo  Downloading the hash to compare
 
 echo complete 
 
-NEWHASH="$(curl 'https://github.com'$(curl -Ls  https://github.com/go-gitea/gitea/releases/latest | grep '\.*linux-amd64.sha256' | cut -d\" -f2  | head -1  ) |  cut -d " " -f 1)"
+NEWHASH="$(curl -L 'https://github.com'$(curl -Ls  https://github.com/go-gitea/gitea/releases/latest | grep '\.*linux-amd64.sha256' | cut -d\" -f2  | head -1  ) |  cut -d " " -f 1)"
 OLDHASH="$(sha256sum gitea | cut -d " " -f 1)"
 
 
