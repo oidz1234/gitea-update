@@ -1,10 +1,10 @@
 #! /bin/bash
 
-echo Downloading the hash to compare
+echo *** Downloading the hash to compare ***
 
- wget -q -O sha256 'https://github.com'$(curl -Ls  https://github.com/go-gitea/gitea/releases/latest | grep '\.*linux-amd64.sha256' | cut -d\" -f2 )
+ wget  -O sha256 'https://github.com'$(curl -Ls  https://github.com/go-gitea/gitea/releases/latest | grep '\.*linux-amd64.sha256' | cut -d\" -f2 )
 
-echo complete
+echo ***  complete ***
 
 NEWHASH="$(cat sha256 | cut -d " " -f 1)"
 
@@ -21,7 +21,7 @@ then
     echo removing old exucutable 
     rm gitea
   
-    echo downloading new one 
+    echo ***  downloading new one ***
     wget -q -O gitea 'https://github.com'$(curl -Ls  https://github.com/go-gitea/gitea/releases/latest | grep '\.*linux-amd64' | cut -d\" -f2 | head -1) 
 
     echo exucting..
@@ -30,4 +30,6 @@ then
     ./gitea web 
 
 fi
+
+rm sha256
 
