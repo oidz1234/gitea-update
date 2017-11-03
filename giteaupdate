@@ -5,13 +5,15 @@ echo  Downloading the hash to compare
 
 echo complete 
 
+#using curl instead of wget to avoid phrasing HTML
+
 NEWHASH="$(curl -L 'https://github.com'$(curl -Ls  https://github.com/go-gitea/gitea/releases/latest | grep '\.*linux-amd64.sha256' | cut -d\" -f2  | head -1  ) |  cut -d " " -f 1)"
 OLDHASH="$(sha256sum gitea | cut -d " " -f 1)"
 
 
 if [ ""$NEWHASH"" !=  ""$OLDHASH"" ];
 then
-    echo it does not equal !;
+    echo Hashes are differnt ! An update is out. 
 
     echo backing up
 
