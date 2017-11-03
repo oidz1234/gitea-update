@@ -2,12 +2,10 @@
 
 echo  Downloading the hash to compare 
 
- wget  -O sha256 'https://github.com'$(curl -Ls  https://github.com/go-gitea/gitea/releases/latest | grep '\.*linux-amd64.sha256' | cut -d\" -f2 )
 
 echo complete 
 
-NEWHASH="$(cat sha256 | cut -d " " -f 1)"
-
+NEWHASH="$(wget -O- 'https://github.com'$(curl -Ls  https://github.com/go-gitea/gitea/releases/latest | grep '\.*linux-amd64.sha256' | cut -d\" -f2  | head -1  ) |  cut -d " " -f 1)"
 OLDHASH="$(sha256sum gitea | cut -d " " -f 1)"
 
 
@@ -27,8 +25,7 @@ then
     ./gitea web
 
 else
-
-    echo There is no update
+echo There is no update
 
 fi
 
