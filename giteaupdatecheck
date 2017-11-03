@@ -1,0 +1,25 @@
+#! /bin/bash
+
+
+ wget -O sha256 'https://github.com'$(curl -Ls  https://github.com/go-gitea/gitea/releases/latest | grep '\.*linux-amd64.sha256' | cut -d\" -f2 )
+
+NEWHASH="$(cat sha256 | cut -d " " -f 1)"
+
+OLDHASH="$(sha256sum gitea | cut -d " " -f 1)"
+
+echo $NEWHASH
+echo $OLDHASH
+
+if [ "$NEWHASH" !=  "$OLDHASH" ];
+then
+    echo it does not equal !;
+rm gitea
+
+wget -O gitea 'https://github.com'$(curl -Ls  https://github.com/go-gitea/gitea/releases/latest | grep '\.*linux-amd64' | cut -d\" -f2 | head -1) 
+
+
+chmod +x gitea
+./gitea web 
+
+fi
+
