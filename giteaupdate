@@ -10,7 +10,7 @@ NEWHASH="$(curl -L 'https://github.com'$(curl -Ls  https://github.com/go-gitea/g
 OLDHASH="$(sha256sum gitea | cut -d " " -f 1)"
 
 
-if [ ""$NEWHASH"" !=  ""$OLDHASH"" ];
+if [ "$NEWHASH" !=  "$OLDHASH" ];
 then
     echo Hashes are differnt ! An update is out. 
 
