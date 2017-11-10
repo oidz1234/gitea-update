@@ -43,8 +43,8 @@ then
 
  smtp0bj = smtplib.SMTP('smtp.gmail.com', 587)
  smtp0bj.starttls()
- smtp0bj.login('***REMOVED***', '***REMOVED***')
- smtp0bj.sendmail('***REMOVED***', '***REMOVED***', 'Subject: giteaupdated\nwow gitea has updated')
+ smtp0bj.login('<emailaddress>', '<password')
+ smtp0bj.sendmail('<emailaddress>', '<reciveaddress>', 'Subject: giteaupdated\nwow gitea has updated')
  smtp0bj.quit()
 
 END
@@ -64,8 +64,8 @@ print('sending update email')
 
 smtp0bj = smtplib.SMTP('smtp.gmail.com', 587)
 smtp0bj.starttls()
-smtp0bj.login('***REMOVED***', '***REMOVED***')
-smtp0bj.sendmail('***REMOVED***', '***REMOVED***', 'Subject: nogiteaupdate\ngitea checked for an update but there was not one')
+smtp0bj.login('<emailaddress>', '<password')
+smtp0bj.sendmail('<emailaddress>', '<reciveaddress>', 'Subject: nogiteaupdate\ngitea checked for an update but there was not one')
 smtp0bj.quit()
 
 END
