@@ -34,7 +34,7 @@ then
     ./gitea web &
 #the following python code sends an email not sure why I decided to use python for this..
 
-#********************************python code******************************
+#********************************start of python code******************************
   python - << END
 
  import smtplib
@@ -49,7 +49,7 @@ then
 
 END
 
-#********************************python code******************************
+#******************************** end of python code******************************
 
 
 else
