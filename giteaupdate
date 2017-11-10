@@ -23,7 +23,7 @@ then
 
     echo   downloading new one
 
-
+    
     version=$(curl -v https://github.com/go-gitea/gitea/releases/latest 2>&1 | grep "^< Location:" | tr -d '\r' | grep -Eo "/v([0-9]|\.)+$" | sed 's|/v||')
     wget -q -O gitea https://github.com/go-gitea/gitea/releases/download/v"$version"/gitea-"$version"-linux-amd64
 
@@ -32,9 +32,45 @@ then
     chmod +x gitea
 
     ./gitea web &
+#the following python code sends an email not sure why I decided to use python for this..
+
+#********************************python code******************************
+  python - << END
+
+ import smtplib
+
+ print('sending update email')
+
+ smtp0bj = smtplib.SMTP('smtp.gmail.com', 587)
+ smtp0bj.starttls()
+ smtp0bj.login('***REMOVED***', '***REMOVED***')
+ smtp0bj.sendmail('***REMOVED***', '***REMOVED***', 'Subject: giteaupdated\nwow gitea has updated')
+ smtp0bj.quit()
+
+END
+
+#********************************python code******************************
+
 
 else
 echo There is no update
 
-fi
+#********************************python code******************************
+  python - << END
 
+import smtplib
+
+print('sending update email')
+
+smtp0bj = smtplib.SMTP('smtp.gmail.com', 587)
+smtp0bj.starttls()
+smtp0bj.login('***REMOVED***', '***REMOVED***')
+smtp0bj.sendmail('***REMOVED***', '***REMOVED***', 'Subject: nogiteaupdate\ngitea checked for an update but there was not one')
+smtp0bj.quit()
+
+END
+
+#********************************python code******************************
+
+
+fi
