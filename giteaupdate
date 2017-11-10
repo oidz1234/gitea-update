@@ -55,7 +55,7 @@ END
 else
 echo There is no update
 
-#********************************start ofpython code******************************
+#********************************start of python code******************************
   python - << END
 
 import smtplib
